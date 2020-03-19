@@ -1,4 +1,4 @@
-package com.kaleyra.db.orm.vinitha;
+package com.kaleyra.db.vinitha;
 
 import java.sql.*;
 
