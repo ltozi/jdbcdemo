@@ -1,4 +1,4 @@
-package com.kaleyra.db.orm.camilo;
+package com.kaleyra.db.camilo;
 
 import java.sql.*;
 import java.util.Scanner;
