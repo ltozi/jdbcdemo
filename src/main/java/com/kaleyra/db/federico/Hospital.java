@@ -1,7 +1,6 @@
-package com.kaleyra.db.orm.federico;
+package com.kaleyra.db.federico;
 
 import java.sql.*;
-import java.util.Scanner;
 
 public class Hospital {
     private static Connection conn;
