@@ -1,4 +1,4 @@
-package com.kaleyra.db.orm.federico;
+package com.kaleyra.db.orm;
 
 import java.sql.*;
 import java.util.Scanner;

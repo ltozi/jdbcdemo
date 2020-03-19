@@ -1,4 +1,4 @@
-package com.kaleyra.db.orm.federico;
+package com.kaleyra.db.orm;
 
 public class Paziente {
     public int codiceComune;
