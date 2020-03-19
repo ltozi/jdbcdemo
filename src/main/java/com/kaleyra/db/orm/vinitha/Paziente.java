@@ -1,4 +1,4 @@
-package com.kaleyra.db.orm;
+package com.kaleyra.db.orm.vinitha;
 
 public class Paziente {
     public int codiceComune;

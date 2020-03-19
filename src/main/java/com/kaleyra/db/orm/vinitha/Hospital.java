@@ -1,7 +1,6 @@
-package com.kaleyra.db.orm;
+package com.kaleyra.db.orm.vinitha;
 
 import java.sql.*;
-import java.util.Scanner;
 
 public class Hospital {
     private static Connection conn;
