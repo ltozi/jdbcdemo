@@ -1,4 +1,4 @@
-package com.kaleyra.db.orm.marco;
+package com.kaleyra.db.marco;
 
 import javax.persistence.Entity;
 

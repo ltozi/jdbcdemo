@@ -1,4 +1,4 @@
-package com.kaleyra.db.orm.marco;
+package com.kaleyra.db.marco;
 
 //import com.sun.org.apache.bcel.internal.generic.PUSH;
 
