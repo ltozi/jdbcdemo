@@ -15,6 +15,8 @@ public class Person {
 
     public String name;
 
+    public String email;
+
     @OneToMany(mappedBy = "author")
     public List<Book> books = new ArrayList< >();
 
