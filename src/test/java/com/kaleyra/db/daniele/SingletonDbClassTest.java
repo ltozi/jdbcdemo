@@ -38,7 +38,7 @@ public class SingletonDbClassTest {
         assertEquals(ins_1, ins_2);
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void shouldThrowExceptionWithNullURL() {
         if(dbService.getJDBC_URL().isEmpty() || dbService.getJDBC_URL() == null)
             throw new IllegalArgumentException("dbService.getJDBC_URL cant be null");
