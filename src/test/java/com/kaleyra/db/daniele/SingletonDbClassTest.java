@@ -14,14 +14,16 @@ import static org.junit.Assert.*;
 
 public class SingletonDbClassTest {
     SingletonDbClass dbService;
+    Statement stmt;
+    Connection conn;
 
     @Before
     public void setUpTest() throws SQLException {
         dbService = new SingletonDbClass();
 
         //connessione al db
-        Connection conn = DriverManager.getConnection(dbService.getJDBC_URL(), dbService.getUsername(), dbService.getPassword());
-        Statement stmt = conn.createStatement();
+        conn = DriverManager.getConnection(dbService.getJDBC_URL(), dbService.getUsername(), dbService.getPassword());
+        stmt = conn.createStatement();
         conn.setAutoCommit(false);
     }
 
@@ -43,11 +45,11 @@ public class SingletonDbClassTest {
     }
 
     @Test
-    public void getUsername() {
-    }
+    public void shouldInsertOnePatient() throws Exception {
+        conn.prepareStatement("insert into Paziente values ('CMMDNL89P06H294P', Daniele, Commodaro, 30, RN, 10030)").execute();
 
-    @Test
-    public void getPassword() {
+        assertTrue(
+                conn.prepareStatement("select * from Paziente where nome = 'Daniele' AND cognome = 'Commodaro', 10030").executeQuery().next());
     }
 
     @Test
