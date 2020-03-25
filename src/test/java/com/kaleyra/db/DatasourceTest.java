@@ -2,6 +2,7 @@ package com.kaleyra.db;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.*;
@@ -9,16 +10,24 @@ import java.util.Arrays;
 
 public class DatasourceTest {
 
-    public static final String JDBC_URL = "jdbc:hsqldb:file:db/hsqldb-db;shutdown=true;hsqldb.write_delay=false";
-//    private static final String JDBC_URL = "jdbc:hsqldb:mem:inmemory;hsqldb.sqllog=3";
+//    public static final String JDBC_URL = "jdbc:hsqldb:file:db/hsqldb-db;shutdown=true;hsqldb.write_delay=false";
+    private static final String JDBC_URL = "jdbc:hsqldb:mem:inmemory;hsqldb.sqllog=3";
     private static final String USERNAME = "SA";
     private static final String PASSWORD = "";
-    private Connection conn;
-    PreparedStatement insertUser;
-    @Before
-    public void setupTest() throws SQLException {
+    private static Connection conn;
+    static PreparedStatement insertUser;
+
+    @BeforeClass
+    public static void setupTest() throws SQLException {
         conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
         conn.setAutoCommit(false);
+        Statement stmt = conn.createStatement();
+
+        stmt.executeQuery("CREATE TABLE user " +
+                "(id INTEGER IDENTITY PRIMARY KEY, " +
+                "name VARCHAR(30), " +
+                "email  VARCHAR(50))");
+
         insertUser = conn.prepareStatement("INSERT INTO user (name, email) VALUES (?, ?)");
     }
 
@@ -32,20 +41,13 @@ public class DatasourceTest {
     @Test
     public void initConnection() throws SQLException {
 
-
         Statement stmt = conn.createStatement();
-
-//        stmt.executeQuery("CREATE TABLE user " +
-//                        "(id INTEGER IDENTITY PRIMARY KEY, " +
-//                        "name VARCHAR(30), " +
-//                        "email  VARCHAR(50))");
-
 
         fillUserValues(insertUser, "Luigi", "luigi.toziani@kaleyra.com");
         insertUser.execute();
 //        stmt.executeQuery("INSERT INTO user (name, email) VALUES ('Luigi', 'luigi.toziani@kaleyra.com')");
 
-        ResultSet rs = stmt.executeQuery("SELECT * FROM USER");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM user");
         while (rs.next()) {
             int x = rs.getInt("id");
             String s = rs.getString("name");
