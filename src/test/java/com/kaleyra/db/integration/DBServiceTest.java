@@ -19,8 +19,8 @@ public class DBServiceTest {
 
     private static Connection conn;
 
-    private static Paziente testSubject = new Paziente("Paolo", "Rossi", "PLARSS93R16D286X", 26,  "Torino", "TO");
-
+    private static Paziente testSubject = new Paziente("Paolo", "Rossi", "PLARSS93R16D286X", 26, "Torino", "TO");
+    int availableBed = 3;
 
     @BeforeClass
     public static void setupDatabaseOnce() throws SQLException {
@@ -72,14 +72,14 @@ public class DBServiceTest {
         int codiceStruttura = rs.getInt("codice_struttura");
         int nBeds = rs.getInt("posti_letto_disponibili");
 
-        rs = stmt.executeQuery(Hospital.insertPatient(testSubject,codiceStruttura ));
+        rs = stmt.executeQuery(Hospital.insertPatient(testSubject, codiceStruttura));
 
         rs = stmt.executeQuery("select * from paziente");
         int counter = 0;
         String name = "";
         String comuneResidenza = "";
         String cf = "";
-        while(rs.next()){
+        while (rs.next()) {
             cf = rs.getString("CF");
             name = rs.getString("NOME");
             comuneResidenza = rs.getString("COMUNE_RESIDENZA");
@@ -99,7 +99,23 @@ public class DBServiceTest {
         rs = stmt.executeQuery(searchForComune(p.codiceComune));
         printResult(rs);
         */
+    }
+
+    @Test
+    public void shouldUpdateHospitalBed() throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(Hospital.updateBeds(10003, 12));
+        rs = stmt.executeQuery("SELECT posti_letto_disponibili FROM OSPEDALE");
+        int counter = 0;
+        int result = 0;
+        while (rs.next()) {
+            counter++;
+            result = rs.getInt(1);
         }
+        assertEquals(result, 12);
+
+        assertEquals(counter, 1);
+    }
 
 
 }

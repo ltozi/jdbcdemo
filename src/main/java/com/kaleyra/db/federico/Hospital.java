@@ -17,11 +17,11 @@ public class Hospital {
         return String.format("insert into Paziente values ('%s', '%s','%s', %d, '%s', %d)", p.cf, p.nome, p.cognome, p.age, p.comune_residenza, codiceStruttura);
     }
 
-    static String updateBeds(int codiceStruttura, int postiLetto) {
+    public static String updateBeds(int codiceStruttura, int postiLetto) {
         return String.format("update Ospedale set posti_letto_disponibili = %d where codice_struttura = %d", postiLetto, codiceStruttura);
     }
 
-    static void printResult(ResultSet rs) throws SQLException {
+    public static void printResult(ResultSet rs) throws SQLException {
         while (rs.next()) {
 
             ResultSetMetaData rsmd = rs.getMetaData();
